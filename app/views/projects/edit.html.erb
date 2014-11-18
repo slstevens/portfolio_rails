@@ -1,0 +1,5 @@
+<%= simple_form_for @project do |f| %>
+  <%= f.input :title, label: 'Enter your project title' %>
+  <%= f.input :description, label: 'Enter your project description' %>
+  <%= f.submit 'Update project'%>
+<% end %>

@@ -1,0 +1,22 @@
+<p><%= @project.title %></p>
+<p><%= @project.description %></p>
+
+<% if can? :update, @project %>
+<%= link_to "Edit #{@project.title}", edit_project_path(@project) %>
+<% end %>
+<%= link_to "Delete #{@project.title}", project_path(@project), method: :delete %>
+
+<% if @project.project_images.any? %>
+<% @project.project_images.each do |project_image|%>
+<ul>
+	<li><%= image_tag project_image.image.url(:thumb) %></li>
+	<li><%= project_image.caption %></li>
+</ul>
+<% end %>
+<% end %>
+
+<%= simple_form_for [@project, @project_image], :html => {:multipart => true} do |f| %>
+<%= f.input :caption, label: 'Enter your project image caption' %>
+<%= f.file_field :image %>
+<%= f.submit 'Create project image'%>
+<% end %>
