@@ -2,9 +2,11 @@ class ProjectImagesController < ApplicationController
 
 	def create 
 		@project = Project.find(params[:project_id])
-		@project.project_images.create(project_image_params)
-		redirect_to project_path(@project)
-		# @project_image = ProjectImage.new(project_image_params)
+		@project_image = @project.project_images.create(project_image_params)
+		puts params
+		# binding.pry
+		# redirect_to project_path(@project)
+		render nothing: true
 	end
 
 	private

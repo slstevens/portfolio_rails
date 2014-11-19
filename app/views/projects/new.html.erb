@@ -13,5 +13,8 @@
 <%= f.input :title, label: 'Enter your project title' %>
 <%= f.input :description, label: 'Enter your project description' %>
 <%= f.file_field :image %>
+<%= f.input :address %>
+<%= f.input :longitude, as: :float %>
+<%= f.input :latitude,  as: :float %>
 <%= f.submit 'Create project'%>
 <% end %>

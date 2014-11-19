@@ -1,5 +1,17 @@
-<p><%= @project.title %></p>
-<p><%= @project.description %></p>
+<p>Title: <%= @project.title %></p>
+<p>Description: <%= @project.description %></p>
+<p>Address: <%= @project.address %></p>
+<p>Longitude: <%= @project.longitude %></p>
+<p>Latitude: <%= @project.latitude %></p>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@project.latitude}%2C#{@project.longitude}" %>
+
+<h3>Nearby projects</h3>
+<ul>
+<% for project in @project.nearbys(10) %>
+  <li><%= link_to project.address, project %> (<%= project.distance.round(2) %> miles)</li>
+<% end %>
+</ul>
+
 
 <% if can? :update, @project %>
 <%= link_to "Edit #{@project.title}", edit_project_path(@project) %>
@@ -8,15 +20,17 @@
 
 <% if @project.project_images.any? %>
 <% @project.project_images.each do |project_image|%>
-<ul>
+<ul id="imagesList">
 	<li><%= image_tag project_image.image.url(:thumb) %></li>
 	<li><%= project_image.caption %></li>
 </ul>
 <% end %>
 <% end %>
 
-<%= simple_form_for [@project, @project_image], :html => {:multipart => true} do |f| %>
+<%= simple_form_for [@project, @project_image], :html => {:multipart => true, class: :dropzone} do |f| %>
+<div>
 <%= f.input :caption, label: 'Enter your project image caption' %>
 <%= f.file_field :image %>
 <%= f.submit 'Create project image'%>
+</div>
 <% end %>

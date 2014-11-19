@@ -27,8 +27,9 @@ gem 'country_select'
 gem 'devise'
 
 gem 'paperclip', '~> 4.2.0'
-gem 'dropzonejs-rails', '~> 0.4.16'
 gem 'cancancan', '~> 1.9'
+gem 'dropzonejs-rails'
+gem 'geocoder'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -50,5 +51,6 @@ group :development, :test do
 
   gem 'rspec-rails'
 	gem 'capybara'
+	gem 'pry'
 end
 

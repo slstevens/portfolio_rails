@@ -23,6 +23,12 @@ Rails.application.routes.draw do
     resources :comments
     resources :project_images
   end
+
+  # resource :profile, :only => [:edit, :update] http://stackoverflow.com/questions/9194767/difference-between-resource-and-resources-methods &&&& Model name should be singular?
+
+  resources :users, shallow: true do
+    resources :profiles
+  end
   # Example resource route with options:
   #   resources :products do
   #     member do
