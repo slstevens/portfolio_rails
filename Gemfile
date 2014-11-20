@@ -30,6 +30,7 @@ gem 'paperclip', '~> 4.2.0'
 gem 'cancancan', '~> 1.9'
 gem 'dropzonejs-rails'
 gem 'geocoder'
+gem 'twitter-bootstrap-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'pages/index'
+
+  get 'pages/about'
+
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -17,7 +21,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
  
-  root to: "projects#index"
+  root to: "pages#index"
 
   resources :projects do
     resources :comments
@@ -27,7 +31,7 @@ Rails.application.routes.draw do
   # resource :profile, :only => [:edit, :update] http://stackoverflow.com/questions/9194767/difference-between-resource-and-resources-methods &&&& Model name should be singular?
 
   resources :users, shallow: true do
-    resources :profiles
+    resource :profile
   end
   # Example resource route with options:
   #   resources :products do

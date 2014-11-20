@@ -1,0 +1,15 @@
+Profile page
+
+<p>Email: <%= @user.email %></p>
+<%= @profile.name %>
+
+<% if @projects.any? %>
+<ul>
+<% @projects.each do |project| %>
+<li>Project title: <%= project.title %></li>
+<li>Project description: <%= project.description%></li>
+<li>Project adddress: <%= project.address %></li>
+<li>Project created by: <%= project.user.profile.name %></li>
+<%end%>
+</ul>
+<%end%>

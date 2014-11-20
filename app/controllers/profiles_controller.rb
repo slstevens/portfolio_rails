@@ -7,11 +7,18 @@ class ProfilesController < ApplicationController
 
 	def create
 		@user = User.find(params[:user_id])
-		# @profile = Profile.new(profile_params)
-		# @user.profile = @profile.save
+
+		@profile = @user.build_profile(profile_params)
+		@profile.save
 		# redirect_to root_path
-		@user.profiles.create(profile_params)
-		redirect_to root_path
+		redirect_to user_profile_path(@user)
+	end
+
+	def show
+		@user = User.find(params[:user_id])
+		@profile = @user.profile
+		@projects = @user.projects
+		# @projects = @user.projects.find(params[@user.id])
 	end
 
 	private

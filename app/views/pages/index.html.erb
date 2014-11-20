@@ -1,0 +1,87 @@
+<div class="jumbotron" id="homepagejumbotron">
+  <h1>Search for architects near you.</h1>
+    <form class="form-horizontal" role="form">
+    <div class="form-group form-group-lg">
+      <label class="control-label" for="formGroupInputLarge"></label>
+      <%= text_field_tag :university, nil, placeholder: "Search here...", class: "typeahead form-control", id: "formGroupInputLarge" %>
+    </div>
+  </form>
+</div>
+
+<h2>Featured Projects</h2>
+
+<% if @projects.any? %>
+<div class="row">
+<% @projects.each do |project| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <div id="thumbnailimage" style="background-image: url('<%=project.image.url(:thumb)%>')"></div>
+      <div class="caption">
+        <h3><%= link_to "#{project.title}", project_path(project) %></h3>
+        <p><%= project.description %></p>
+        <p>Project created by: <%= project.user.profile.name %></p>
+        <% if can? :create, Comment %>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+<% else %>
+  No projects yet
+<% end %>
+
+<h2>Featured Professionals</h2>
+
+<div class="row">
+<% @users.each do |user|%>
+	<div class="col-md-4">
+          <div class="well well-sm">
+              <div class="media">
+                  <a class="thumbnail pull-left" href="#">
+                      <img class="media-object" src="http://placehold.it/80">
+                  </a>
+                  <div class="media-body">
+                      <h4 class="media-heading"><%= user.profile.name %></h4>
+              		<p><span class="label label-info"><%= user.projects.count %> projects</span> <span class="label label-primary">89 followers</span></p>
+                      <p>
+                          <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-comment"></span> Message</a>
+                          <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-heart"></span> Favorite</a>
+                          <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Unfollow</a>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+<% end %>
+</div>
+
+<% if @projects.any? %>
+  <% @projects.each do |project| %>
+    <h2><%= link_to "#{project.title}", project_path(project) %></h2>
+    <p><%= project.description %></p>
+    <%= image_tag project.image.url(:thumb) %>
+    <% if can? :create, Comment %>
+    <p><%= link_to "Add comment", new_project_comment_path(project) %></p>
+    <% end %>
+    <h3>Reviews for <%= project.title %></h3>
+			<% if project.comments.any? %>
+			  <ul>
+			    <% project.comments.each do |comment| %>
+			      <li>
+			        <%= comment.comment %>
+			      </li>
+			    <% end %>
+			  </ul>
+			<% else %>
+			  <p>No comments.</p>
+			<% end %>
+  <% end %>
+<% else %>
+  No projects yet
+<% end %>
+
+<% if can? :create, Project %>
+<a href='projects/new'>Add a project</a>
+<% end %>

@@ -1,11 +1,12 @@
 Hi
 
 
-<%= simple_form_for [@user, @profile], :html => {:multipart => true} do |f| %>
+<%= simple_form_for [@user, @profile], url: user_profile_path(@user), :html => {:multipart => true} do |f| %>
 <%= f.input :name, label: 'Enter your name' %>
 <%= f.input :description, label: 'Enter your description' %>
 <%= f.input :address %>
 <%= f.input :longitude, as: :float %>
 <%= f.input :latitude,  as: :float %>
-<%= f.submit 'Create project'%>
+<%= f.file_field :image %>
+<%= f.submit 'Create profile'%>
 <% end %>
