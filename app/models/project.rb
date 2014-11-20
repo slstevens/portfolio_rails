@@ -11,5 +11,13 @@ class Project < ActiveRecord::Base
 	geocoded_by :address
 	after_validation :geocode, :if => :address_changed?
 	belongs_to :user
-	
+
+
+	reverse_geocoded_by :latitude, :longitude do |obj,results|
+		if geo = results.first
+			obj.city    = geo.city
+			obj.postal_code = geo.postal_code
+		end
+	end
+	after_validation :reverse_geocode
 end

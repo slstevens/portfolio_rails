@@ -1,9 +1,9 @@
-Hi
-
+<h1>Complete your profile</h1>
 
 <%= simple_form_for [@user, @profile], url: user_profile_path(@user), :html => {:multipart => true} do |f| %>
 <%= f.input :name, label: 'Enter your name' %>
 <%= f.input :description, label: 'Enter your description' %>
+<%= f.input :website_address, label: 'Enter your website address' %>
 <%= f.input :address %>
 <%= f.input :longitude, as: :float %>
 <%= f.input :latitude,  as: :float %>

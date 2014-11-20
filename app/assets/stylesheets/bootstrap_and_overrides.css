@@ -6,6 +6,11 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
+#homepagejumbotron {
+    background-image: url("http://upload.wikimedia.org/wikipedia/commons/9/97/London_(Panorama)_(8151657308).jpg");
+    background-size: cover;
+}
+
 #thumbnailimage {
   height: 150px;
   background-size: cover;
@@ -19,3 +24,4 @@ body {
     padding-top: 0px;
   }
 }
+
